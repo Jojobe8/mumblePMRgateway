@@ -39,6 +39,7 @@
 #include "UserLockFile.h"
 #include "License.h"
 #include "EnvUtils.h"
+#include "ExternalPTT.h"
 
 #if defined(Q_OS_WIN) && defined(QT_NO_DEBUG)
 #include <shellapi.h> // For CommandLineToArgvW()
@@ -437,6 +438,10 @@ int main(int argc, char **argv) {
 	g.o->setActive(g.s.os.bEnable);
 
 	g.lcd = new LCD();
+
+	if(g.extptt) 
+		if(g.extptt->init())
+			g.extptt->getPINsetting();
 
 	// Process any waiting events before initializing our MainWindow.
 	// The mumble:// URL support for Mac OS X happens through AppleEvents,

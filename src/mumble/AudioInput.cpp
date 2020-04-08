@@ -19,6 +19,7 @@
 #include "Global.h"
 #include "NetworkConfig.h"
 #include "VoiceRecorder.h"
+#include "ExternalPTT.h"
 
 #ifdef USE_RNNOISE
 extern "C" {
@@ -896,7 +897,9 @@ void AudioInput::encodeAudioFrame() {
 		if (iSilentFrames > 500)
 			iFrameCounter = 0;
 	}
-
+   	
+	if(g.extptt) g.iPushToTalk = g.extptt->getPTTstate();
+	
 	if (p) {
 		if (! bIsSpeech)
 			p->setTalking(Settings::Passive);

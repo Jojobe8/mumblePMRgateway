@@ -779,4 +779,8 @@ lrel.variable_out = rcc.depends
 
 QMAKE_EXTRA_COMPILERS *= lrel
 
+HEADERS *= ExternalPTT.h
+SOURCES *= ExternalPTT.cpp
+LIBS *= -lwiringPi
+
 include(../../qmake/symbols.pri)

@@ -10,6 +10,7 @@
 #include "Channel.h"
 #include "Global.h"
 #include "AudioOutput.h"
+#include "ExternalPTT.h"
 
 QHash<unsigned int, ClientUser *> ClientUser::c_qmUsers;
 QReadWriteLock ClientUser::c_qrwlUsers;
@@ -131,6 +132,15 @@ QString ClientUser::getFlagsString() const {
 }
 
 void ClientUser::setTalking(Settings::TalkState ts) {
+	//---JOJO---
+	static bool bLastSQL = true; // Force sync on first call
+	bool bSQL = !c_qlTalking.isEmpty();
+	if(bSQL != bLastSQL) {
+		if(!g.extptt->getSavePTTstate())
+			g.extptt->setSQLstate(!bSQL);
+	}
+ 	bLastSQL = bSQL;
+
 	if (tsState == ts)
 		return;
 

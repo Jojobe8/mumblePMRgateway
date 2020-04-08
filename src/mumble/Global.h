@@ -32,6 +32,7 @@ class CELTCodec;
 class OpusCodec;
 class LogEmitter;
 class DeveloperConsole;
+class ExternalPTT;
 
 class QNetworkAccessManager;
 
@@ -88,6 +89,8 @@ public:
 	unsigned int uiImageLength;
 	unsigned int uiMaxUsers;
 	bool bQuit;
+
+	ExternalPTT *extptt;
 
 	bool bHappyEaster;
 	static const char ccHappyEaster[];
