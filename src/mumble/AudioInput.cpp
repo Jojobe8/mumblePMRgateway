@@ -898,7 +898,12 @@ void AudioInput::encodeAudioFrame() {
 			iFrameCounter = 0;
 	}
    	
-	if(g.extptt) g.iPushToTalk = g.extptt->getPTTstate();
+	if(g.extptt) {
+		if(g.extptt->getPTTstate())
+			g.iPushToTalk = 24;
+		if((!g.extptt->getPTTstate()) && (g.iPushToTalk == 24))
+		    g.iPushToTalk = 0;
+	}
 	
 	if (p) {
 		if (! bIsSpeech)

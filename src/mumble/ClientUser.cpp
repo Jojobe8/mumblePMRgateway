@@ -136,7 +136,7 @@ void ClientUser::setTalking(Settings::TalkState ts) {
 	static bool bLastSQL = true; // Force sync on first call
 	bool bSQL = !c_qlTalking.isEmpty();
 	if(bSQL != bLastSQL) {
-		if(!g.extptt->getSavePTTstate())
+		if(!(g.iPushToTalk |= g.extptt->getPTTstate()))
 			g.extptt->setSQLstate(!bSQL);
 	}
  	bLastSQL = bSQL;
